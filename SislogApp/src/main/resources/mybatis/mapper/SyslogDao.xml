@@ -20,6 +20,7 @@
             <if test="intranetPort != null and intranetPort != ''">and intranetPort = #{intranetPort}</if>
             <if test="userName != null and userName != ''">and userName = #{userName}</if>
         </where>
+        order by ReceivedAt desc
         limit #{startIndex},#{limit}
     </select>
 

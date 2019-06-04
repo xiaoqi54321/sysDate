@@ -22,9 +22,9 @@
                         <div class="layui-row">
                             <div class="layui-col-md4 layui-col-xs3">IP监控</div>
                             <div class="layui-col-md8 layui-col-space10 layui-col-xs9"style="display: flex; flex-direction:row-reverse;align-items:center;height:52px;">
-
-                                <button class="layui-btn layui-btn-sm btn-search">开始监控</button>
-                                <button class="layui-btn layui-btn-sm btn-search-stop" style="display:none ">停止监控</button>
+                                <input type="text" value="" name="thisTime" style="display: none">
+                                <button id="btn-search1" class="layui-btn layui-btn-sm btn-search">开始监控</button>
+                                <button id="btn-search-stop1" class="layui-btn layui-btn-sm btn-search-stop" style="display:none ">停止监控</button>
                                 <div class="layui-input-inline title-input">
                                   <input type="text" name="intranetIp" placeholder="IP" autocomplete="off" class="layui-input">
                                 </div>
@@ -38,9 +38,9 @@
 <%--                                    <input type="text" name="intranetPort" placeholder="端口" autocomplete="off" class="layui-input">--%>
                                  <select name="tableRefresh">
                                      <option value="">—监控数据刷新时间—</option>
-                                     <option value="3">3秒</option>
-                                     <option value="5">5秒</option>
-                                     <option value="10">10秒</option>
+                                     <option value=3>3秒</option>
+                                     <option value=5>5秒</option>
+                                     <option value=10>10秒</option>
                                  </select>
                                 </div>
 

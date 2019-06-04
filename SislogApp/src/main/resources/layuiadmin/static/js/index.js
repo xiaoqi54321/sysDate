@@ -4,7 +4,7 @@ layui.use(['index', 'helper', 'element'], function () {
 
 	const iframe = document.createElement("iframe");
 
-	$(iframe).attr('frameborder', 0).attr('src', './views/workbench/index.jsp').addClass('layadmin-iframe');
+	$(iframe).attr('frameborder', 0).attr('src', './views/derive.jsp').addClass('layadmin-iframe');
 
 	if (iframe.attachEvent) {
 		iframe.attachEvent("onload", function () {

@@ -102,7 +102,7 @@
         </div>
         <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
           <ul class="layui-tab-title" id="LAY_app_tabsheader">
-            <li lay-id="./views/workbench/index.jsp" lay-attr="./views/workbench/index.jsp" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
+            <li lay-id="../views/derive.jsp" lay-attr="../views/derive.jsp" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
           </ul>
         </div>
       </div>

@@ -17,18 +17,18 @@ layui.define(function (e) {
 		const $ = layui.$;
 		const form = $('.layui-card.layui-form.div-scanning-list');
 
-	//	let startTime = form.find('input[name=startTime]').val() == "" ? "" : Math.round(new Date(form.find('input[name=startTime]').val()).getTime() / 1000);
+	//	let startTime =  Math.round(new Date(form.find('input[name=startTime]').val()).getTime() / 1000);
 	//	let endTime = form.find('input[name=endTime]').val() == "" ? "" : Math.round(new Date(form.find('input[name=endTime]').val()).getTime() / 1000);
 
-	//	let result=form.find('input[name=result]:checked').val()== ""||form.find('input[name=result]:checked').val()== undefined ? "error":form.find('input[name=result]:checked').val()
+		let thisTime=form.find('input[name=thisTime]').val()== ""||form.find('input[name=thisTime]').val()== undefined ? "":form.find('input[name=thisTime]').val()
 
 		that.map = {
 
 			'intranetIp': form.find('input[name=intranetIp]').val(),
-			'intranetPort': form.find('input[name=intranetPort]').val()
-
+			'intranetPort': form.find('input[name=intranetPort]').val(),
+			'startStatus':thisTime
 		}
-		alert(JSON.stringify(that.map));
+	//	alert(JSON.stringify(that.map));
 		that.tableid = "id-table-database-cve";
 		return that;
 	}
@@ -129,27 +129,38 @@ layui.define(function (e) {
 			where: params().map
 		});
 
-		$('.layui-btn.btn-search-stop').click(function () {
+		var t1 ;
+			$('.layui-btn.btn-search-stop').click(function () {
 			//去掉定时器的方法
 			window.clearTimeout(t1);
 			//显示查询按钮
-			$(".layui-btn btn-search-stop").hide();
-			$(".layui-btn btn-search").show();
+
+			$(this).hide();
+			$(this).prev().show();
+
 			events['search'].call(this);
 		})
 		//查询
 		$('.layui-btn.btn-search').click(function () {
+			$(this).hide();
+			$(this).next().show();
+			$(this).prev().val(new Date());
+			let tableRefreshTime=  $("select[name=tableRefresh]").val()==""? "0": $("select[name=tableRefresh]").val();
+			alert($(this).prev().val(),"________"+JSON.stringify($(this).prev().val()))
+			//alert(JSON.stringify(tableRefreshTime));
 
-			let tableRefreshTime= form.find('input[name=tableRefresh]').val();
+
+            if (0!=tableRefreshTime) {
 
 				//定时执行，tableRefreshTime秒后执行
-			var t1 = window.setTimeout(refreshCount, 1000 * tableRefreshTime);
-			$(".layui-btn btn-search-stop").show();
-			$(".layui-btn btn-search").hide();
-			function refreshCount() {
-				events['search'].call(this);
+				t1 = window.setInterval(refreshCount, 1000 * tableRefreshTime);
+				function refreshCount() {
+					events['search'].call(this);
+				}
+
 			}
 
+			events['search'].call(this);
 
 		});
 		$(".select").each(function () {
@@ -184,7 +195,7 @@ layui.define(function (e) {
 		requestRender();
 	};
 
-	layui.use(['alimx.table', 'laydate'], function () {
+	layui.use(['alimx.table', 'laydate','jquery'], function () {
 		const $ = layui.$;
 		const table = layui.table;
 		//页面初始化
