@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
             .antMatchers("/**")
-            .fullyAuthenticated().and().httpBasic();
+            .fullyAuthenticated().and().httpBasic().and().headers().frameOptions().disable();
             http.csrf().disable();//关闭默认的csrf认证
     }
 

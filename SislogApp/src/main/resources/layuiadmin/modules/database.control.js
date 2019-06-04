@@ -17,7 +17,7 @@ layui.define(function (e) {
 		const $ = layui.$;
 		const form = $('.layui-card.layui-form.div-scanning-list');
 
-	//	let startTime =  Math.round(new Date(form.find('input[name=startTime]').val()).getTime() / 1000);
+		let startTime =  Math.round(new Date(form.find('input[name=startTime]').val()).getTime() / 1000);
 	//	let endTime = form.find('input[name=endTime]').val() == "" ? "" : Math.round(new Date(form.find('input[name=endTime]').val()).getTime() / 1000);
 
 		let thisTime=form.find('input[name=thisTime]').val()== ""||form.find('input[name=thisTime]').val()== undefined ? "":form.find('input[name=thisTime]').val()
@@ -28,7 +28,7 @@ layui.define(function (e) {
 			'intranetPort': form.find('input[name=intranetPort]').val(),
 			'startStatus':thisTime
 		}
-	//	alert(JSON.stringify(that.map));
+		alert(JSON.stringify(that.map));
 		that.tableid = "id-table-database-cve";
 		return that;
 	}
@@ -128,7 +128,7 @@ layui.define(function (e) {
 			page: true, //开启分页
 			where: params().map
 		});
-
+        var sts;
 		var t1 ;
 			$('.layui-btn.btn-search-stop').click(function () {
 			//去掉定时器的方法
@@ -137,21 +137,23 @@ layui.define(function (e) {
 
 			$(this).hide();
 			$(this).prev().show();
-
+			$(this).prev().prev().val("stopControl");
 			events['search'].call(this);
 		})
 		//查询
 		$('.layui-btn.btn-search').click(function () {
+			sts=new Date().getTime();
 			$(this).hide();
 			$(this).next().show();
-			$(this).prev().val(new Date());
+			$(this).prev().val(sts);
+			events['search'].call(this);
 			let tableRefreshTime=  $("select[name=tableRefresh]").val()==""? "0": $("select[name=tableRefresh]").val();
-			alert($(this).prev().val(),"________"+JSON.stringify($(this).prev().val()))
+			//alert($(this).prev().val(),"________"+JSON.stringify($(this).prev().val()))
 			//alert(JSON.stringify(tableRefreshTime));
 
 
             if (0!=tableRefreshTime) {
-
+				$(this).prev().val("");
 				//定时执行，tableRefreshTime秒后执行
 				t1 = window.setInterval(refreshCount, 1000 * tableRefreshTime);
 				function refreshCount() {

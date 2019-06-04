@@ -80,6 +80,11 @@
                 </dd>
               </dl>--%>
             </li>
+              <li data-name="workbench" data-jump="system/get" class="layui-nav-item layui-this layui-nav-itemed">
+
+                  <a href="./views/derive.jsp" lay-href="system/get" lay-tips="sys查询" lay-direction="2"> <i class="layui-icon layui-icon-auz"></i> <cite>sys查询</cite> </a>
+
+              </li>
           </ul>
         </div>
       </div>
